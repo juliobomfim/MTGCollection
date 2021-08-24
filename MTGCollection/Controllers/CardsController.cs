@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MtgApiManager.Lib.Service;
 using MTGCollection.Data;
 using MTGCollection.Models;
 
@@ -13,10 +14,12 @@ namespace MTGCollection.Controllers
     public class CardsController : Controller
     {
         private readonly MyDbContext _context;
+        private readonly IMtgServiceProvider _service;
 
-        public CardsController(MyDbContext context)
+        public CardsController(MyDbContext context, IMtgServiceProvider service)
         {
             _context = context;
+            _service = service;
         }
 
         // GET: Cards
