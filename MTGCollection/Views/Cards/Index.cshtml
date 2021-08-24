@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MTGCollection.Models.Card>
+@using System.Web
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Card's Collection</h1>
+
+<p>
+    <button class="btn btn-success" onclick="location.href='@Url.Action("Create", "Cards")'"><i class="fas fa-plus-circle"></i></button>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                Custo de Mana
+            </th>
+            <th>
+                Coleção
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a data-toggle="tooltip" title="<img class='card-tooltip' width='180' height='240' src='@item.Image' />">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </a>
+                </td>
+                <td>
+                    @Html.Raw(item.CustoManaConvertido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Collection)
+                </td>
+                <td>
+                    <button class="btn btn-light" onclick="location.href='@Url.Action("Edit", "Cards", new Card { Id = item.Id })'"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-light" onclick="location.href='@Url.Action("Details", "Cards", new Card { Id = item.Id })'"><i class="fas fa-eye"></i></button>
+                    <button class="btn btn-light" onclick="location.href='@Url.Action("Delete", "Cards", new Card { Id = item.Id })'"><i class="fas fa-trash-alt"></i></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
