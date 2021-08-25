@@ -14,12 +14,12 @@ namespace MTGCollection.Controllers
     public class CardsController : Controller
     {
         private readonly MyDbContext _context;
-        private readonly IMtgServiceProvider _service;
+        private readonly ICardService _cardService;
 
-        public CardsController(MyDbContext context, IMtgServiceProvider service)
+        public CardsController(MyDbContext context, ICardService cardService)
         {
             _context = context;
-            _service = service;
+            _cardService = cardService;
         }
 
         // GET: Cards
@@ -153,6 +153,13 @@ namespace MTGCollection.Controllers
         private bool CardExists(Guid id)
         {
             return _context.Cards.Any(e => e.Id == id);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> GetCardInfo(string name)
+        {
+            var result = await _cardService.Where(x => x.Name, name).AllAsync();
+            return Json(result);
         }
     }
 }
