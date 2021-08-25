@@ -15,9 +15,13 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <div class="input-group">
+                    <input asp-for="Name" class="form-control" />
+                    <div class="input-group-append">
+                        <button class="btn btn-dark"><i class="fab fa-searchengin"></i></button>
+                    </div>
+                </div>
                 <span asp-validation-for="Name" class="text-danger"></span>
-                <button class="btn btn-light"><i class="fab fa-searchengin"></i></button>
             </div>
             <div class="form-group">
                 <label asp-for="ManaCost" class="control-label"></label>
