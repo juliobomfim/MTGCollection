@@ -155,10 +155,14 @@ namespace MTGCollection.Controllers
             return _context.Cards.Any(e => e.Id == id);
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<JsonResult> GetCardInfo(string name)
         {
-            var result = await _cardService.Where(x => x.Name, name).AllAsync();
+            var result = await _cardService
+                .Where(x => x.Language, "Portuguese (Brazil)")
+                .Where(x => x.Name, name)
+                .AllAsync();
+
             return Json(result);
         }
     }
