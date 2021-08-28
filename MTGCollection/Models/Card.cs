@@ -17,8 +17,11 @@ namespace MTGCollection.Models
             if (!string.IsNullOrEmpty(manaCost))
             {
                 var listaCustoConvertido = string.Empty;
-                var tipos = manaCost.Split("{").Where(x => x.Length > 0);
-                var tiposFormatados = tipos.Select(x => x.Replace("}", ""));
+                var tiposFormatados = manaCost.Split("{")
+                    .Where(x => x.Length > 0)
+                    .Select(x => x.Replace("}", "")
+                    .Replace("/", "")).ToList();
+
                 foreach (var t in tiposFormatados)
                 {
                     int number;
@@ -47,6 +50,7 @@ namespace MTGCollection.Models
         public string Side { get; set; } //Identificador de lado ex: A ou B Para cartas com multiplas faces.
         public List<Card> OtherFaceCards { get; set; } //Outras face da carta caso seja de multiplas faces.
         public string Image { get; set; } //Link de imagem da Carta (Buscar do Serviço).
+        public int Quantity { get; set; }
         public string CustoManaConvertido { get { return FormatarCustoDeMana(ManaCost); } }
 
 

@@ -13,20 +13,23 @@
 </div>
 <hr />
 <div class="row" id="card-form">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <div class="col" id="name-img">
-                    <label asp-for="Name" class="control-label"></label>
-                    <div class="input-group">
-                        <input asp-for="Name" class="form-control" id="nome" />
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-dark" onclick="BuscarDetalhes()"><i class="fab fa-searchengin"></i></button>
-                        </div>
+                <label asp-for="Name" class="control-label"></label>
+                <div class="input-group">
+                    <input asp-for="Name" class="form-control" id="nome" />
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-dark" onclick="BuscarDetalhes()"><i class="fab fa-searchengin"></i></button>
                     </div>
-                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" id="quantity" value="1" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ManaCost" class="control-label"></label>
@@ -70,7 +73,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Loyalty" class="control-label"></label>
-                <input asp-for="Loyalty" class="form-control" id="loyalty" />
+                <input asp-for="Loyalty" class="form-control" id="loyalty" value="0" />
                 <span asp-validation-for="Loyalty" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -88,7 +91,13 @@
             </div>
         </form>
     </div>
+    <div class="col-md-6">
+        <div>
+            <img id="card-image" src="" />
+        </div>
+    </div>
 </div>
+
 
 <script type="text/javascript">
 
@@ -108,10 +117,13 @@ function BuscarDetalhes() {
             $('#set').val(result.value[0].setName);
             $('#power').val(result.value[0].power);
             $('#toughness').val(result.value[0].toughness);
-            $('#loyalty').val(result.value[0].loyalty);
             $('#image').val(result.value[0].imageUrl);
+            if (result.value[0].loyalty > 0) {
+                $('#loyalty').val(result.value[0].loyalty);
+            }
 
             $('#alert-s').removeAttr('hidden');
+            $('#card-image').attr("src", result.value[0].imageUrl);
         },
         error: function (result) {
             console.log("erro");
