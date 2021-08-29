@@ -38,7 +38,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Type" class="control-label"></label>
-                <select asp-for="Type" class="form-control" asp-items="Html.GetEnumSelectList<EnumTypes>()"><option style="display:none">Selecione um tipo</option></select>
+                <select asp-for="Type" class="form-control" asp-items="Html.GetEnumSelectList<EnumTypes>()" id="card-type"><option style="display:none">Selecione um tipo</option></select>
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -68,7 +68,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Color" class="control-label"></label>
-                <select asp-for="Color" class="form-control" asp-items="Html.GetEnumSelectList<EnumColors>()"><option style="display:none">Selecione uma cor</option></select>
+                <select asp-for="Color" class="form-control" asp-items="Html.GetEnumSelectList<EnumColors>()" id="card-color"><option style="display:none">Selecione uma cor</option></select>
                 <span asp-validation-for="Color" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -101,7 +101,7 @@
 
 <script type="text/javascript">
 
-function BuscarDetalhes() {
+    function BuscarDetalhes() {
     $.ajax({
         type: "GET",
         url: '@Url.Action("GetCardInfo", "Cards")',
@@ -118,6 +118,16 @@ function BuscarDetalhes() {
             $('#power').val(result.value[0].power);
             $('#toughness').val(result.value[0].toughness);
             $('#image').val(result.value[0].imageUrl);
+            $('#card-type').val(result.value[0].types[0]);
+
+            if (result.value[0].IsMulticolor == true) {
+                $('#card-color').val("Multicolor");
+            } else if (result.value[0].colors.length == 1) {
+                $('#card-color').val(result.value[0].colors[0]);
+            } else if (result.value[0].IsColorless == true) {
+                $('#card-color').val("Colorless");
+            }
+
             if (result.value[0].loyalty > 0) {
                 $('#loyalty').val(result.value[0].loyalty);
             }
@@ -131,6 +141,9 @@ function BuscarDetalhes() {
     });
 }
 </script>
+
+@{ 
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

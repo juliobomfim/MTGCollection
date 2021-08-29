@@ -4,17 +4,19 @@ namespace MTGCollection.Util
 {
     public enum EnumColors
     {
-        [Description("R")]
+        [Description("Red")]
         Red,
-        [Description("U")]
+        [Description("Blue")]
         Blue,
-        [Description("B")]
+        [Description("Black")]
         Black,
-        [Description("G")]
+        [Description("Green")]
         Green,
-        [Description("W")]
+        [Description("White")]
         White,
+        [Description("Colorless")]
         Colorless,
+        [Description("Multicolor")]
         Multicolor
     }
 }

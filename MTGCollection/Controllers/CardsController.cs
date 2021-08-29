@@ -23,10 +23,9 @@ namespace MTGCollection.Controllers
         }
 
         // GET: Cards
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber = 1)
         {
-            var cards = await _context.Cards.ToListAsync();
-            return View(cards);
+            return View(await PaginatedList<Card>.CreateAsync(_context.Cards, pageNumber, 7));
         }
 
         // GET: Cards/Details/5
@@ -165,5 +164,6 @@ namespace MTGCollection.Controllers
 
             return Json(result);
         }
+
     }
 }
