@@ -26,50 +26,92 @@
                 </div>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" id="quantity" value="1" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">Qtd.</label>
+                        <input asp-for="Quantity" class="form-control" id="quantity" value="1" />
+                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="ManaCost" class="control-label"></label>
+                        <input asp-for="ManaCost" class="form-control" id="manaCost" />
+                        <span asp-validation-for="ManaCost" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Type" class="control-label"></label>
+                        <select asp-for="Type" class="form-control" id="card-type">
+                            <option style="display:none">Selecione um tipo</option>
+                            <option value="Artifact">Artifact</option>
+                            <option value="Conspiracy">Conspiracy</option>
+                            <option value="Creature">Creature</option>
+                            <option value="Enchantment">Enchantmen</option>
+                            <option value="Instant">Instant</option>
+                            <option value="Land">Land</option>
+                            <option value="Phenomenon">Phenomenon</option>
+                            <option value="Plane">Plane</option>
+                            <option value="Planeswalker">Planeswalk</option>
+                            <option value="Scheme">Scheme</option>
+                            <option value="Sorcery">Sorcery</option>
+                            <option value="Tribal">Tribal</option>
+                            <option value="Vanguard">Vanguard</option>
+                        </select>
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="ManaCost" class="control-label"></label>
-                <input asp-for="ManaCost" class="form-control" id="manaCost" />
-                <span asp-validation-for="ManaCost" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Type" class="control-label"></label>
-                <select asp-for="Type" class="form-control" asp-items="Html.GetEnumSelectList<EnumTypes>()" id="card-type"><option style="display:none">Selecione um tipo</option></select>
-                <span asp-validation-for="Type" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Collection" class="control-label"></label>
+                        <input asp-for="Collection" class="form-control" id="set" />
+                        <span asp-validation-for="Collection" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Power" class="control-label"></label>
+                        <input asp-for="Power" class="form-control" id="power" />
+                        <span asp-validation-for="Power" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Toughness" class="control-label"></label>
+                        <input asp-for="Toughness" class="form-control" id="toughness" />
+                        <span asp-validation-for="Toughness" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Color" class="control-label"></label>
+                        <select asp-for="Color" class="form-control" id="card-color">
+                            <option style="display:none">Selecione uma cor</option>
+                            <option value="Red">Red <i class='mana small sr'></i></option>
+                            <option value="Blue">Blue</option>
+                            <option value="Black">Black</option>
+                            <option value="Green">Green</option>
+                            <option value="White">White</option>
+                            <option value="Colorless">Colorless</option>
+                            <option value="Multicolor">Multicolor</option>
+                        </select>
+                        <span asp-validation-for="Color" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" id="originalText" />
+                <textarea asp-for="Description" class="form-control" id="originalText" rows="5"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Lore" class="control-label"></label>
-                <input asp-for="Lore" class="form-control" id="flavorText" />
+                <textarea asp-for="Lore" class="form-control" id="flavorText" rows="2"></textarea>
                 <span asp-validation-for="Lore" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Collection" class="control-label"></label>
-                <input asp-for="Collection" class="form-control" id="set" />
-                <span asp-validation-for="Collection" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Power" class="control-label"></label>
-                <input asp-for="Power" class="form-control" id="power" />
-                <span asp-validation-for="Power" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Toughness" class="control-label"></label>
-                <input asp-for="Toughness" class="form-control" id="toughness" />
-                <span asp-validation-for="Toughness" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Color" class="control-label"></label>
-                <select asp-for="Color" class="form-control" asp-items="Html.GetEnumSelectList<EnumColors>()" id="card-color"><option style="display:none">Selecione uma cor</option></select>
-                <span asp-validation-for="Color" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Loyalty" class="control-label"></label>
@@ -93,13 +135,19 @@
     </div>
     <div class="col-md-6">
         <div>
-            <img id="card-image" src="" />
+            <img id="card-image" src="~/images/back.jpg" width="265" height="370" />
         </div>
     </div>
 </div>
 
 
 <script type="text/javascript">
+
+    window.onload = function () {
+        if (!($('#image').val() == "")) {
+            $('#card-image').attr("src", result.value[0].imageUrl);
+        }
+    }
 
     function BuscarDetalhes() {
     $.ajax({
@@ -120,11 +168,11 @@
             $('#image').val(result.value[0].imageUrl);
             $('#card-type').val(result.value[0].types[0]);
 
-            if (result.value[0].IsMulticolor == true) {
+            if (result.value[0].isMultiColor == true) {
                 $('#card-color').val("Multicolor");
-            } else if (result.value[0].colors.length == 1) {
+            } else if (result.value[0].colors != null) {
                 $('#card-color').val(result.value[0].colors[0]);
-            } else if (result.value[0].IsColorless == true) {
+            } else if (result.value[0].isColorless == true) {
                 $('#card-color').val("Colorless");
             }
 
@@ -132,8 +180,11 @@
                 $('#loyalty').val(result.value[0].loyalty);
             }
 
+            $('#card-image').attr('src', result.value[0].imageUrl);
+
             $('#alert-s').removeAttr('hidden');
-            $('#card-image').attr("src", result.value[0].imageUrl);
+
+            setTimeout(function () { $('#alert-s').fadeOut('slow'); }, 3000);
         },
         error: function (result) {
             console.log("erro");
@@ -142,7 +193,7 @@
 }
 </script>
 
-@{ 
+@{
 }
 
 @section Scripts {

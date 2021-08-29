@@ -57,7 +57,7 @@ namespace MTGCollection.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ManaCost,Type,Description,Lore,Collection,Power,Toughness,Color,Loyalty,Side,Image")] Card card)
+        public async Task<IActionResult> Create([Bind("Id,Name,Quantity,ManaCost,Type,Description,Lore,Collection,Power,Toughness,Color,Loyalty,Side,Image")] Card card)
         {
             if (ModelState.IsValid)
             {
