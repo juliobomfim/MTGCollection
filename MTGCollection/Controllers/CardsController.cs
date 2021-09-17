@@ -120,28 +120,8 @@ namespace MTGCollection.Controllers
             return View(card);
         }
 
-        // GET: Cards/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var card = await _context.Cards
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (card == null)
-            {
-                return NotFound();
-            }
-
-            return View(card);
-        }
-
-        // POST: Cards/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        [HttpPost]
+        public async Task<IActionResult> Delete(Guid id)
         {
             var card = await _context.Cards.FindAsync(id);
             _context.Cards.Remove(card);

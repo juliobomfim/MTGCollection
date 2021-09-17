@@ -1,5 +1,6 @@
 ﻿@model PaginatedList<MTGCollection.Models.Card>
 @using System.Web
+@using MTGCollection.Models.ViewModels
 
 @{
     ViewData["Title"] = "Index";
@@ -49,14 +50,13 @@
                 <td>
                     <button class="btn btn-light" onclick="location.href='@Url.Action("Edit", "Cards", new Card { Id = item.Id })'"><i class="fas fa-edit"></i></button>
                     <button class="btn btn-light" onclick="location.href='@Url.Action("Details", "Cards", new Card { Id = item.Id })'"><i class="fas fa-eye"></i></button>
-                    <button class="btn btn-light" onclick="location.href='@Url.Action("Delete", "Cards", new Card { Id = item.Id })'"><i class="fas fa-trash-alt"></i></button>
+                    <button class="btn btn-light dialogCallButtom" data-toggle="modal" data-target="#modal" data-path="Cards/Delete/@item.Id" data-id="@item.Name"><i class="fas fa-trash-alt"></i></button>
                 </td>
             </tr>
         }
     </tbody>
-
-
 </table>
+<partial name="_Modal" />
 @{
     var prevDisabled = !Model.PreviousPage ? "disabled" : "";
     var nextDisabled = !Model.NextPage ? "disabled" : "";

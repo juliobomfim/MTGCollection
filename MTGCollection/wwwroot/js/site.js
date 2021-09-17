@@ -3,6 +3,25 @@
 
 // Write your JavaScript code.
 
+var ptd;
+var name;
+
+$('.dialogCallButtom').click(function () {
+    ptd = $(this).data('path').replace('"','').replace('$','');
+    name = $(this).data('id');
+    $('#card-name-modal').text(name);
+});
+
+$('#dialogConfirmButtom').click(function () {
+    if (ptd.includes("Delete")) {
+        var req = ptd.split('/');
+        var controller = req[0].replace('{', '').replace('}', '').replace('"', '');
+        var id = req[2].replace('{', '').replace('}', '').replace('"', '').replace('/', '');
+        $.post(controller + '/Delete/', { id: id });
+        location.reload();
+    }
+});
+
 $('a[data-toggle="tooltip"]').tooltip({
     placement: 'bottom',
     html: true
