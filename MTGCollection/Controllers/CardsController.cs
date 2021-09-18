@@ -1,34 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MTGCollection.Data;
+using MTGCollection.Interfaces;
+using MTGCollection.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using MtgApiManager.Lib.Service;
-using MTGCollection.Data;
-using MTGCollection.Models;
 
 namespace MTGCollection.Controllers
 {
     public class CardsController : Controller
     {
         private readonly MyDbContext _context;
-        private readonly ICardService _cardService;
+        private readonly ICardServices _cardServices;
 
-        public CardsController(MyDbContext context, ICardService cardService)
+        public CardsController(MyDbContext context, ICardServices cardServices)
         {
             _context = context;
-            _cardService = cardService;
+            _cardServices = cardServices;
         }
 
-        // GET: Cards
         public async Task<IActionResult> Index(int pageNumber = 1)
         {
             return View(await PaginatedList<Card>.CreateAsync(_context.Cards, pageNumber, 7));
         }
 
-        // GET: Cards/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -52,9 +48,6 @@ namespace MTGCollection.Controllers
             return View();
         }
 
-        // POST: Cards/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Quantity,ManaCost,Type,Description,Lore,Collection,Power,Toughness,Color,Loyalty,Side,Image")] Card card)
@@ -69,7 +62,6 @@ namespace MTGCollection.Controllers
             return View(card);
         }
 
-        // GET: Cards/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -85,9 +77,6 @@ namespace MTGCollection.Controllers
             return View(card);
         }
 
-        // POST: Cards/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,ManaCost,Type,Description,Lore,Collection,Power,Toughness,Color,Loyalty,Side,Image")] Card card)
@@ -137,10 +126,7 @@ namespace MTGCollection.Controllers
         [HttpGet]
         public async Task<JsonResult> GetCardInfo(string name)
         {
-            var result = await _cardService
-                .Where(x => x.Language, "Portuguese (Brazil)")
-                .Where(x => x.Name, name)
-                .AllAsync();
+            var result = await _cardServices.BuscarCard(name);
 
             return Json(result);
         }

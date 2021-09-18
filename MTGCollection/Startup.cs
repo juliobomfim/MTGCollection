@@ -7,6 +7,8 @@ using MTGCollection.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using MtgApiManager.Lib.Service;
+using MTGCollection.Services;
+using MTGCollection.Interfaces;
 
 namespace MTGCollection
 {
@@ -25,6 +27,7 @@ namespace MTGCollection
             services.AddControllersWithViews();
             services.AddDbContext<MyDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("MyDbContext")));
             services.AddSingleton(services => new MtgServiceProvider().GetCardService());
+            services.AddTransient<ICardServices, CardServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

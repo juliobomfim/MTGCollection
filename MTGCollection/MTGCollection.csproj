@@ -16,4 +16,8 @@
     <PackageReference Include="MtgApiManager.Lib" Version="2.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Contracts\" />
+  </ItemGroup>
+
 </Project>

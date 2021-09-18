@@ -46,19 +46,19 @@
                         <label asp-for="Type" class="control-label"></label>
                         <select asp-for="Type" class="form-control" id="card-type">
                             <option style="display:none">Selecione um tipo</option>
-                            <option value="Artifact">Artifact</option>
-                            <option value="Conspiracy">Conspiracy</option>
-                            <option value="Creature">Creature</option>
-                            <option value="Enchantment">Enchantmen</option>
-                            <option value="Instant">Instant</option>
-                            <option value="Land">Land</option>
-                            <option value="Phenomenon">Phenomenon</option>
-                            <option value="Plane">Plane</option>
-                            <option value="Planeswalker">Planeswalk</option>
-                            <option value="Scheme">Scheme</option>
-                            <option value="Sorcery">Sorcery</option>
-                            <option value="Tribal">Tribal</option>
-                            <option value="Vanguard">Vanguard</option>
+                            <option value="0">Artifact</option>
+                            <option value="1">Conspiracy</option>
+                            <option value="2">Creature</option>
+                            <option value="3">Enchantmen</option>
+                            <option value="4">Instant</option>
+                            <option value="5">Land</option>
+                            <option value="6">Phenomenon</option>
+                            <option value="7">Plane</option>
+                            <option value="8">Planeswalk</option>
+                            <option value="9">Scheme</option>
+                            <option value="10">Sorcery</option>
+                            <option value="11">Tribal</option>
+                            <option value="12">Vanguard</option>
                         </select>
                         <span asp-validation-for="Type" class="text-danger"></span>
                     </div>
@@ -91,13 +91,13 @@
                         <label asp-for="Color" class="control-label"></label>
                         <select asp-for="Color" class="form-control" id="card-color">
                             <option style="display:none">Selecione uma cor</option>
-                            <option value="Red">Red <i class='mana small sr'></i></option>
-                            <option value="Blue">Blue</option>
-                            <option value="Black">Black</option>
-                            <option value="Green">Green</option>
-                            <option value="White">White</option>
-                            <option value="Colorless">Colorless</option>
-                            <option value="Multicolor">Multicolor</option>
+                            <option value="0">Red <i class='mana small sr'></i></option>
+                            <option value="1">Blue</option>
+                            <option value="2">Black</option>
+                            <option value="3">Green</option>
+                            <option value="4">White</option>
+                            <option value="5">Colorless</option>
+                            <option value="6">Multicolor</option>
                         </select>
                         <span asp-validation-for="Color" class="text-danger"></span>
                     </div>
@@ -155,32 +155,18 @@
         url: '@Url.Action("GetCardInfo", "Cards")',
         data: { name: $("#nome").val() },
         success: function (result) {
-            if (!(result.value.length > 0)) {
-                return;
-            }
 
-            $('#manaCost').val(result.value[0].manaCost);
-            $('#originalText').val(result.value[0].originalText);
-            $('#flavorText').val(result.value[0].flavor);
-            $('#set').val(result.value[0].setName);
-            $('#power').val(result.value[0].power);
-            $('#toughness').val(result.value[0].toughness);
-            $('#image').val(result.value[0].imageUrl);
-            $('#card-type').val(result.value[0].types[0]);
-
-            if (result.value[0].isMultiColor == true) {
-                $('#card-color').val("Multicolor");
-            } else if (result.value[0].colors != null) {
-                $('#card-color').val(result.value[0].colors[0]);
-            } else if (result.value[0].isColorless == true) {
-                $('#card-color').val("Colorless");
-            }
-
-            if (result.value[0].loyalty > 0) {
-                $('#loyalty').val(result.value[0].loyalty);
-            }
-
-            $('#card-image').attr('src', result.value[0].imageUrl);
+            $('#manaCost').val(result.manaCost);
+            $('#originalText').val(result.description);
+            $('#flavorText').val(result.lore);
+            $('#set').val(result.collection);
+            $('#power').val(result.power);
+            $('#toughness').val(result.toughness);
+            $('#image').val(result.image);
+            $('#card-type').val(result.type);
+            $('#card-color').val(result.color);
+            $('#loyalty').val(result.loyalty);
+            $('#card-image').attr('src', result.image == null ? "../images/back.jpg" : result.image );
 
             $('#alert-s').removeAttr('hidden');
 
