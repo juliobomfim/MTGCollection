@@ -28,32 +28,35 @@ $('a[data-toggle="tooltip"]').tooltip({
 });
 
 $('#card-color').change(function () {
-    if ($(this).val() == "Red") {
-        $(this).css("backgroundColor", "rgba(204, 0, 0, 0.3)");
-        $(this).css("color", "white");
-    }
-    else if ($(this).val() == "Blue") {
-        $(this).css("backgroundColor", "rgba(0, 102, 204, 0.3)");
-        $(this).css("color", "white");
-    }
-    else if ($(this).val() == "Black") {
-        $(this).css("backgroundColor", "rgba(32, 32, 32, 0.3)");
-        $(this).css("color", "white");
-    }
-    else if ($(this).val() == "Green") {
-        $(this).css("backgroundColor", "rgba(0, 204, 102, 0.3)");
-        $(this).css("color", "white");
-    }
-    else if ($(this).val() == "White") {
-        $(this).css("backgroundColor", "#e5e5e5");
-        $(this).css("color", "black");
-    }
-    else if ($(this).val() == "Colorless") {
-        $(this).css("backgroundColor", "rgba(250, 250, 250, 0.3)");
-        $(this).css("color", "black");
-    }
-    else if ($(this).val() == "Multicolor") {
-        $(this).css("backgroundColor", "rgba(153, 153, 0, 0.3)");
-        $(this).css("color", "black");
+    var selectItem = $(this).children("option:selected").val(); 
+    switch (selectItem) {
+        case 'Red':
+            $(this).css("backgroundColor", "rgba(204, 0, 0, 0.3)");
+            $(this).css("color", "white");
+            break;
+        case 'Blue':
+            $(this).css("backgroundColor", "rgba(0, 102, 204, 0.3)");
+            $(this).css("color", "white");
+            break;
+        case 'Black':
+            $(this).css("backgroundColor", "rgba(32, 32, 32, 0.3)");
+            $(this).css("color", "white");
+            break;
+        case 'Green':
+            $(this).css("backgroundColor", "rgba(0, 204, 102, 0.3)");
+            $(this).css("color", "white");
+            break;
+        case 'White':
+            $(this).css("backgroundColor", "#e5e5e5");
+            $(this).css("color", "black");
+            break;
+        case 'Colorless':
+            $(this).css("backgroundColor", "rgba(250, 250, 250, 0.3)");
+            $(this).css("color", "black");
+            break;
+        case 'Multicolor':
+            $(this).css("backgroundColor", "rgba(153, 153, 0, 0.3)");
+            $(this).css("color", "black");
+            break;
     }
 });
