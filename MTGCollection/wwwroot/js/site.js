@@ -7,7 +7,7 @@ var ptd;
 var name;
 
 $('.dialogCallButtom').click(function () {
-    ptd = $(this).data('path').replace('"','').replace('$','');
+    ptd = LimparDados($(this).data('path'));
     name = $(this).data('id');
     $('#card-name-modal').text(name);
 });
@@ -15,10 +15,9 @@ $('.dialogCallButtom').click(function () {
 $('#dialogConfirmButtom').click(function () {
     if (ptd.includes("Delete")) {
         var req = ptd.split('/');
-        var controller = req[0].replace('{', '').replace('}', '').replace('"', '');
-        var id = req[2].replace('{', '').replace('}', '').replace('"', '').replace('/', '');
-        $.post(controller + '/Delete/', { id: id });
-        location.reload();
+        var controller = LimparDados(req[0]);
+        var id = LimparDados(req[2]);
+        $.post(controller + '/Delete/', { id: id }, setTimeout(function () {location.reload()}, 1000));
     }
 });
 
@@ -60,3 +59,8 @@ $('#card-color').change(function () {
             break;
     }
 });
+
+function LimparDados(path) {
+    path.replace('{', '').replace('}', '').replace('"', '').replace('/', '').replace('$', '');
+    return path;
+}
